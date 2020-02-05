@@ -7,7 +7,7 @@ $pd = new user();
 
 
                //si on clique sur la connexion
- if (!empty($_POST['formdeconexion'])) 
+ if (!empty($_POST['submitdeco'])) 
     {   	
     unset ( $_SESSION ['id'] );
     unset ($_SESSION['login']);	
@@ -25,7 +25,7 @@ $erreur="<p> class='codeerreur'>vous n'etes pas connecté !</p>";
 if (!empty($_POST["submit"])) 
 {
 
-      if (!empty($_POST['login']) && !empty($_POST['password'])) 
+      if (!empty($_POST['login']) && !empty($_POST['password']) && !empty($_POST['email']) && !empty($_POST['firstname']) && !empty($_POST['lastname'])) 
       {
       	$login = htmlspecialchars($_POST['login']);
        $email = htmlspecialchars($_POST['email']);
@@ -89,7 +89,7 @@ else
         <br/>
                 <input class="butonconexion" type="submit" name="submit" value="CONNEXION"/>  
         <br/><br/>
-        		<input class="butonconexion2" type="submit" name="submit" value="se deconnecté"/>       		   
+        		<input class="butonconexion2" type="submit" name="submitdeco" value="se deconnecté"/>       		   
           </form>
         
         </table>
