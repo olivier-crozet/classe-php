@@ -3,7 +3,7 @@
 /** verif taille login
 	verification de disponibilité du login
 	requette insertion
-	
+
  * 
  */
 class user 
@@ -40,7 +40,7 @@ class user
                             VALUES (\"$login\",\"$password\",\"$email\",\"$firstname\",\"$lastname\")";                
                             $inser= mysqli_query($connexion, $requete);
 
-                             
+                             echo $login.$mail.$firstname.$lastname ;
                           } 
                           else
                           {
@@ -57,4 +57,52 @@ class user
 }
 
 
+/**fonction connexion
+
+
+*/
+/**
+ * 
+ */
+class connexion 
+{
+	public $login="";
+
+
+	function register($login,$password)
+	{
+
+		$bdd = new PDO('mysql:host=127.0.0.1;dbname=bddclass','root','');
+		if (isset($_POST['formconnexion']))
+		{ 
+			echo "bbbbbbbbbb";
+			if (!empty($_POST['psedoconect']) && !empty($_POST['passwordconect']) )
+			{
+				echo "cccccccccccccc";
+				$requser = $connexion->prepare("SELECT * FROM utilisateurs where login = ? AND password = ?");
+				$requser->execute(array($loginconexion, $passwordconexion));
+				$userexist = $requser->rowcount();
+				if($userexist == 1)
+				{			
+					echo "dddddddddd";
+					$userinfo = $requser->fetch();
+			     	session_start();
+			     	$_SESSION['id'] = $userinfo['id'];
+			     	$_SESSION['login'] = $userinfo['login'];
+
+			     	echo $login;
+			         	
+			     }
+			     else
+			     {
+			     	$erreur = "<br/>mauvais psedo ou mauvais mot de passe !";
+			     }
+			 }
+			 else
+			 {
+			 	$erreur = "<p class=\"er\"><br/>tous les champ doives etre completés !";
+			 }	
+		}
+	}
+}
 ?>

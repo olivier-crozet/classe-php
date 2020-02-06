@@ -87,11 +87,12 @@ else
           </tr>    
         </table>
         <br/>
-                <input class="butonconexion" type="submit" name="submit" value="CONNEXION"/>  
+                <input class="butonconexion" type="submit" name="submit" value="inscription"/>  
         <br/><br/>
         		<input class="butonconexion2" type="submit" name="submitdeco" value="se deconnecté"/>       		   
           </form>
         
+         
         </table>
 
     </body>
