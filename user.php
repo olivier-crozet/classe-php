@@ -20,10 +20,10 @@ class user
 	function register($login,$password,$email,$firstname,$lastname)
 	{
 
-echo $email."</br>";
 
 
-			echo "conard";
+
+			
 		 	    if ($login < 249 && $password < 249 && $firstname < 249 && $lastname < 249 )
 		 	     {
 		 	    	# code...
@@ -36,12 +36,12 @@ echo $email."</br>";
 
                            if($retour==0)
                            {                 
-                                 echo "string";    
+                                 
                             $requete="INSERT INTO user(login,password,email,firstname,lastname)
                             VALUES (\"$login\",\"$password\",\"$email\",\"$firstname\",\"$lastname\")";                
                             $inser= mysqli_query($connexion, $requete);
 
-                             echo $login.$email.$firstname.$lastname ;
+                             
                           } 
                           else
                           {
@@ -81,7 +81,8 @@ class connexion
           	 $login2=($_POST['login']);
             $login=htmlspecialchars($_POST['login']);
             $login2=($_POST['login']);
-            $password= sha1($_POST["password"]);
+            $password= password_hash($_POST["password"], PASSWORD_DEFAULT,array('cost'=> 12));
+
 // $reqid=("SELECT id FROM utilisateurs where login='$login'");
  //           $idsql = mysqli_query($connexion,$reqid);
    //         var_dump($reqid);
@@ -107,7 +108,7 @@ class connexion
                   $_SESSION['password']=$_POST['password'];
                   $_SESSION['id']=$bostring[0][0];
                 echo $_SESSION['id'];
-                echo "conecté";
+                header("location: connexion.php");
                 }
             else
             {

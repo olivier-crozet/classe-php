@@ -22,10 +22,10 @@ if ( isset($_SESSION['id']))
     //connexion
 if (!empty($_POST['conne']))
  {
- 	echo "string";
+ 	
 	if (!empty($_POST['login']) && !empty($_POST['password']))
 	 {
-	 	echo "AAAA";
+	 
 	 	$login = htmlspecialchars($_POST['login']);
 	 	$password= password_hash($_POST["password"], PASSWORD_DEFAULT,array('cost'=> 12));
 
