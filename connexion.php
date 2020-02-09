@@ -78,6 +78,8 @@ if (!empty($_POST['conne']))
 	  $pa -> log();
 }
 
+	$pv = new affichall();
+	$pv -> all();
 ?>
 
 

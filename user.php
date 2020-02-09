@@ -178,6 +178,35 @@ class affichlog
 	     }
 	}
 }
+class affichall
+{
+	function all()
+	{
+		if (!empty($_SESSION['id']))
+		 {
+			# code...
+		$connexion = mysqli_connect("localhost","root","","bddclass");
+		$id = $_SESSION['id'];
+		$req = "SELECT * FROM user where id = '$id'";
+		$reqbdd = mysqli_query($connexion,$req);
+		$result = mysqli_fetch_array($reqbdd);
+	
+	//	foreach ($result[1] as $key ) 
+		
+			echo $result[0]."</br>";
+			echo $result[1]."</br>";
+			echo $result[2]."</br>";
+			echo $result[3]."</br>";
+			echo $result[4]."</br>";
+			echo $result[5]."</br>";
+
+		
+		
+		}
+	}
+}
+
+
 ?>
 
 
