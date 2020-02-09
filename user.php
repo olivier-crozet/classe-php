@@ -252,6 +252,27 @@ class prenom
 		}
 	}
 }
+
+class nom 
+{
+	
+	function n()
+	{
+		if (isset($_SESSION['id'])) 
+		{
+		$connexion = mysqli_connect("localhost","root","","bddclass");
+		$id = $_SESSION['id'];
+		$req = "SELECT lastname FROM user where id = '$id'";
+		$reqbdd = mysqli_query($connexion,$req);
+		$result = mysqli_fetch_assoc($reqbdd);
+		
+		echo "lastname :".$result['lastname'];
+
+		}
+	}
+}
+
+
 ?>
 
 

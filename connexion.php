@@ -89,6 +89,11 @@ if (!empty($_POST['conne']))
 	$ps =new prenom();
 	$ps -> pre();
 	echo "</br>";
+
+	$px =new nom();
+	$px -> n();
+	echo "</br>";
+
 ?>
 
 
