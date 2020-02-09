@@ -16,24 +16,20 @@ if ( isset($_SESSION['id']))
 {
 	echo "vous etes connecter";
 }
-
- if (!empty($_POST['submitdeco'])) 
-    {   	
-    unset ( $_SESSION ['id'] );
-    unset ($_SESSION['login']);	
-$erreur="<p> class='codeerreur'>vous n'etes pas connecté !</p>";
-    }
-
+?>
+<form method="post" action="">
+<?php
     //connexion
-if (isset($formconnexion))
+if (!empty($_POST['conne']))
  {
  	echo "string";
-	if (!empty($_POST['login']) && !empty($_POST['password']) && empty($_POST['email']) && empty($_POST['firstname']) && empty($_POST['lastname']))
+	if (!empty($_POST['login']) && !empty($_POST['password']))
 	 {
 	 	echo "AAAA";
-	 		$loginconexion = htmlspecialchars($_POST['login']);
-		$passwordconexion = sha1($_POST['password']);
-		$po -> register($login,$password);
+	 	$login = htmlspecialchars($_POST['login']);
+	 	$password= password_hash($_POST["password"], PASSWORD_DEFAULT,array('cost'=> 12));
+
+		$pd -> registe($login,$password);
 	 }
 	 else
 	 {
@@ -47,7 +43,7 @@ if (isset($formconnexion))
 <DOCTYPE html>
 
 	<body>
-		<form method="post" action="">
+		
 
 			 <table class="inputconexion" >
           <tr>
@@ -60,14 +56,14 @@ if (isset($formconnexion))
           </tr>
           <tr>
                <td>
-                <label  for="passwordconect">mot de passe :</label>
+                <label  for="password">mot de passe :</label>
               </td>
               <td>
                 <input type="password" name="password" placeholder="ecrire votre mot de passe">
               </td>
           </tr>    
         </table>
-        <input class="butonconexion" type="submit" name="formconnexion" value="CONNEXION"/>
+        <input class="butonconexion" type="submit" name="conne" value="CONNEXION"/>
     </br>
      <input class="butonconexion" type="submit" name="submitdeco" value="DECONNEXION"/>
     </form>

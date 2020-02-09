@@ -20,9 +20,10 @@ class user
 	function register($login,$password,$email,$firstname,$lastname)
 	{
 
-		if ( $login > 3   && $password > 3 && $firstname >2 && $lastname >2)
-		 {
-			# code...
+echo $email."</br>";
+
+
+			echo "conard";
 		 	    if ($login < 249 && $password < 249 && $firstname < 249 && $lastname < 249 )
 		 	     {
 		 	    	# code...
@@ -35,12 +36,12 @@ class user
 
                            if($retour==0)
                            {                 
-                                     
+                                 echo "string";    
                             $requete="INSERT INTO user(login,password,email,firstname,lastname)
                             VALUES (\"$login\",\"$password\",\"$email\",\"$firstname\",\"$lastname\")";                
                             $inser= mysqli_query($connexion, $requete);
 
-                             echo $login.$mail.$firstname.$lastname ;
+                             echo $login.$email.$firstname.$lastname ;
                           } 
                           else
                           {
@@ -51,7 +52,7 @@ class user
                  {
                  	echo "tu te fou de moi !";
                  }          
-        }                  
+                        
     }
      	
 }
@@ -69,39 +70,54 @@ class connexion
 	public $login="";
 
 
-	function register($login,$password)
+	function registe($login,$password)
 	{
 
-		$bdd = new PDO('mysql:host=127.0.0.1;dbname=bddclass','root','');
-		if (isset($_POST['formconnexion']))
+		$connexion=mysqli_connect("localhost","root","","bddclass");
+		if (isset($_POST['conne']))
 		{ 
-			echo "bbbbbbbbbb";
-			if (!empty($_POST['psedoconect']) && !empty($_POST['passwordconect']) )
-			{
-				echo "cccccccccccccc";
-				$requser = $connexion->prepare("SELECT * FROM utilisateurs where login = ? AND password = ?");
-				$requser->execute(array($loginconexion, $passwordconexion));
-				$userexist = $requser->rowcount();
-				if($userexist == 1)
-				{			
-					echo "dddddddddd";
-					$userinfo = $requser->fetch();
-			     	session_start();
-			     	$_SESSION['id'] = $userinfo['id'];
-			     	$_SESSION['login'] = $userinfo['login'];
+			 if (!empty($_POST['login']) && !empty($_POST['password']))
+          {
+          	 $login2=($_POST['login']);
+            $login=htmlspecialchars($_POST['login']);
+            $login2=($_POST['login']);
+            $password= sha1($_POST["password"]);
+// $reqid=("SELECT id FROM utilisateurs where login='$login'");
+ //           $idsql = mysqli_query($connexion,$reqid);
+   //         var_dump($reqid);
+     //       $reidsql = mysqli_fetch_array($idsql);
+       //     var_dump($reidsql);
+           // echo $idsql ;
 
-			     	echo $login;
-			         	
-			     }
-			     else
-			     {
-			     	$erreur = "<br/>mauvais psedo ou mauvais mot de passe !";
-			     }
-			 }
-			 else
-			 {
-			 	$erreur = "<p class=\"er\"><br/>tous les champ doives etre completés !";
-			 }	
+            //REQUETTE VERIFICATION
+            $requete=("SELECT * FROM user  where login = '$login' ");
+            $sql=mysqli_query($connexion,$requete);
+            
+            $retour=mysqli_fetch_array($sql);  
+            $reqid=("SELECT id FROM user where login = '$login2' ");
+            $reqisql=mysqli_query($connexion,$reqid);
+            $bostring=mysqli_fetch_all($reqisql);
+
+
+           
+             
+                 if (password_verify($_POST['password'], $retour['password']))
+                 {
+                  $_SESSION['login']=$_POST['login'];
+                  $_SESSION['password']=$_POST['password'];
+                  $_SESSION['id']=$bostring[0][0];
+                echo $_SESSION['id'];
+                echo "conecté";
+                }
+            else
+            {
+              echo "le mot de passe ou le login ne correspond pas !";
+            }
+          }
+   else
+   {
+    echo "remplissez tous les champs !";
+   }
 		}
 	}
 }

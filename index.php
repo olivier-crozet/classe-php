@@ -29,11 +29,12 @@ if (!empty($_POST["submit"]))
       {
       	$login = htmlspecialchars($_POST['login']);
        $email = htmlspecialchars($_POST['email']);
+
        $firstname = htmlspecialchars($_POST['firstname']);
        $lastname = htmlspecialchars($_POST['lastname']);
-       $password = sha1($_POST['password']);
+       $password= password_hash($_POST["password"], PASSWORD_DEFAULT,array('cost'=> 12));
 
-       $pd -> register($login,$password,$firstname,$lastname,$email);
+       $pd -> register($login,$password,$email,$firstname,$lastname);
    }
 else
   {
