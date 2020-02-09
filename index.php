@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-
+include ("user-pdo.php");
 include("user.php");
 $pd = new user();
 
@@ -33,8 +33,8 @@ if (!empty($_POST["submit"]))
        $firstname = htmlspecialchars($_POST['firstname']);
        $lastname = htmlspecialchars($_POST['lastname']);
        $password= password_hash($_POST["password"], PASSWORD_DEFAULT,array('cost'=> 12));
-
-       $pd -> register($login,$password,$email,$firstname,$lastname);
+       $vo = new userpdo();
+       $vo -> inscription($login,$password,$email,$firstname,$lastname);
    }
 else
   {
