@@ -178,6 +178,11 @@ class affichlog
 	     }
 	}
 }
+
+
+/**
+selectionne et affiche tout
+*/
 class affichall
 {
 	function all()
@@ -206,6 +211,28 @@ class affichall
 	}
 }
 
+
+/**
+ * 
+ */
+class email 
+{
+	
+	function mail()
+	{
+		if (isset($_SESSION['id'])) 
+		{
+		$connexion = mysqli_connect("localhost","root","","bddclass");
+		$id = $_SESSION['id'];
+		$req = "SELECT email FROM user where id = '$id'";
+		$reqbdd = mysqli_query($connexion,$req);
+		$result = mysqli_fetch_assoc($reqbdd);
+		
+		echo "mail :".$result['email'];
+
+		}
+	}
+}
 
 ?>
 

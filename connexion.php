@@ -80,6 +80,9 @@ if (!empty($_POST['conne']))
 
 	$pv = new affichall();
 	$pv -> all();
+
+	$pt =new email();
+	$pt -> mail();
 ?>
 
 
