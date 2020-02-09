@@ -154,6 +154,30 @@ class verifcon
 	}
 }
 
+/**
+ * 
+ */
+class affichlog 
+{
+	
+	function log()
+	{
+		//session_start();
+
+		if (!empty($_SESSION['id']))
+		 {
+			# code...
+		$id = $_SESSION['id'];
+				$connexion = mysqli_connect("localhost","root","","bddclass");
+
+		$req = "SELECT login FROM user where id = '$id' ";
+		$reqbdd = mysqli_query($connexion,$req);
+		$result = mysqli_fetch_assoc($reqbdd);
+		
+		echo "login :".$result['login'];
+	     }
+	}
+}
 ?>
 
 

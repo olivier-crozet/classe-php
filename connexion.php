@@ -19,13 +19,8 @@ $erreur="<p> class='codeerreur'>vous n'etes pas connecté !</p>";
 if ( !empty($_SESSION['id'])) 
 {
 	echo "vous etes connecter";
-	$po = new verifcon();
-	  $po -> isconect();
-}
-else
-{
 
-}
+
 ?>
 <form method="post" action="">
 <?php
@@ -75,12 +70,13 @@ if (!empty($_POST['conne']))
         </table>
         <input class="butonconexion" type="submit" name="conne" value="CONNEXION"/>
     </br>
-     <input class="butonconexion" type="submit" name="submitdeco" value="DECONNEXION"/>
+     <input class="butonconexion" type="submit" name="submitdeco" value="DECONNEXION"/></br>
     </form>
 <?php
 
-	$po = new verifcon();
-	  $po -> isconect();
+		$pa = new affichlog();
+	  $pa -> log();
+}
 
 ?>
 
