@@ -5,16 +5,26 @@ session_start();
 include("user.php");
 $pd = new connexion();
 
+
+	$po = new verifcon();
+	  $po -> isconect();
 if (!empty($_POST['submitdeco'])) 
     {   	
     unset ( $_SESSION ['id'] );
     unset ($_SESSION['login']);	
 $erreur="<p> class='codeerreur'>vous n'etes pas connecté !</p>";
+	header("location: connexion.php");
     }
                //si on clique sur la connexion
-if ( isset($_SESSION['id'])) 
+if ( !empty($_SESSION['id'])) 
 {
 	echo "vous etes connecter";
+	$po = new verifcon();
+	  $po -> isconect();
+}
+else
+{
+
 }
 ?>
 <form method="post" action="">
@@ -67,5 +77,13 @@ if (!empty($_POST['conne']))
     </br>
      <input class="butonconexion" type="submit" name="submitdeco" value="DECONNEXION"/>
     </form>
+<?php
+
+	$po = new verifcon();
+	  $po -> isconect();
+
+?>
+
+
 </body>
 </html>

@@ -62,8 +62,11 @@ class user
 
 
 */
-/**
- * 
+/**verifi les champ vide
+ * requette secltion tous du login
+ requette section l'id du login
+ verif mdp
+ enregistre session
  */
 class connexion 
 {
@@ -122,4 +125,35 @@ class connexion
 		}
 	}
 }
+
+
+
+
+
+/**
+ * verifi la connexion par un boleen
+ */
+class verifcon 
+{
+	
+	function isconect ()
+	{
+		
+
+		if ( !empty ($_SESSION['id'])) 
+		{
+			$vrai = true;
+			echo $vrai;
+		}
+		else
+		{
+
+			$faux = false;
+			echo $faux ;
+		}
+	}
+}
+
 ?>
+
+
