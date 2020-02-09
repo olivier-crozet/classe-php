@@ -234,6 +234,24 @@ class email
 	}
 }
 
+class prenom 
+{
+	
+	function pre()
+	{
+		if (isset($_SESSION['id'])) 
+		{
+		$connexion = mysqli_connect("localhost","root","","bddclass");
+		$id = $_SESSION['id'];
+		$req = "SELECT firstname FROM user where id = '$id'";
+		$reqbdd = mysqli_query($connexion,$req);
+		$result = mysqli_fetch_assoc($reqbdd);
+		
+		echo "firstname :".$result['firstname'];
+
+		}
+	}
+}
 ?>
 
 

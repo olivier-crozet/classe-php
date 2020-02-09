@@ -80,9 +80,15 @@ if (!empty($_POST['conne']))
 
 	$pv = new affichall();
 	$pv -> all();
+	echo "</br>";
 
 	$pt =new email();
 	$pt -> mail();
+	echo "</br>";
+
+	$ps =new prenom();
+	$ps -> pre();
+	echo "</br>";
 ?>
 
 
