@@ -15,11 +15,7 @@ class userpdo
 	{
 
 
-        $login = htmlspecialchars($_POST['login']);
-       $email = htmlspecialchars($_POST['email']);
 
-       $firstname = htmlspecialchars($_POST['firstname']);
-       $lastname = htmlspecialchars($_POST['lastname']);
  $password= password_hash($_POST["password"], PASSWORD_DEFAULT,array('cost'=> 12));
 			
 		 	    if ($login < 249 && $password < 249 && $firstname < 249 && $lastname < 249 )
@@ -27,27 +23,15 @@ class userpdo
 		 	    	# code...
                  $bdd = new PDO('mysql:host=localhost;dbname=bddclass', 'root', '');
 
-               //   $connexion=mysqli_connect("localhost","root","","bddclass");
-                //  $reqdoublon = "SELECT login FROM `user` where login=\"$login\";";
                   $req =  "SELECT login FROM `user` where login=\"$login\";"; 
                   $requser = $bdd->query($req);    
                              
-                  //$retour=_num_rows($requser);
                   $retour = $requser->fetchAll(PDO::FETCH_ASSOC);
-
-                  
-                  
+  
                            if(empty($retour))
                            {                 
-                                 
-
-                        
-             
-            $query = $bdd->prepare("INSERT INTO user (login,email,firstname,lastname,password) VALUES(?,?,?,?,?)");
-
-           // $requet = $bdd->execute($query);   
+            $query = $bdd->prepare("INSERT INTO user (login,email,firstname,lastname,password) VALUES(?,?,?,?,?)");  
              $query->execute(array("$login","$email","$firstname","$lastname","$password"));
-
                           } 
                           else
                           {
@@ -63,4 +47,63 @@ class userpdo
      	
 }
 
+
+
+
+/**
+ * 
+ */
+class conexion
+{
+  
+  function conex()
+  {
+      $bdd = new PDO('mysql:host=127.0.0.1;dbname=bddclass','root','');
+
+  if (isset($_POST['submit']))
+   { 
+      $login = htmlspecialchars($_POST['login']);
+    $password= password_hash($_POST["password"], PASSWORD_DEFAULT,array('cost'=> 12));
+    
+      if (!empty($_POST['login']) && !empty($_POST['password']) )
+      {
+      $requser = $bdd->prepare("SELECT * FROM user where login = '$login' ");
+      $requser->execute(array($login,));
+      $userexist = $requser->rowcount();
+
+          if($userexist == 1)
+           {
+                $reqmdp = $bdd ->query("SELECT password FROM user where login = '$login'");
+                $mdp_bdd_reponse = $reqmdp -> fetch();
+                $mdp = $_POST['password'];
+
+                if(password_verify($mdp, $mdp_bdd_reponse[0]))
+                {                  
+                   $rec = $bdd -> query("SELECT * FROM user where login = '$login'");
+                   $recall = $rec -> fetch();
+                   $_SESSION['login'] = $recall['login'];
+                   $_SESSION['email'] = $recall['email'];
+                   $_SESSION['firstname'] = $recall['firstname'];
+                   $_SESSION['lastname'] = $recall['lastname'];
+                     echo "conecté";
+                }
+               
+            }
+
+          else
+          {
+          $erreur = "<br/>mauvais psedo ou mauvais mot de passe !";
+          }
+          }
+
+      else
+      {
+      $erreur = "<br/>tous les champ doives etre completés !";
+      }
+    
+  }
+  }
+}
 ?>
+
+
